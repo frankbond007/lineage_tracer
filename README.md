@@ -69,6 +69,16 @@ gen_graph_annotate(graph)
 3. Use `trace_lineage.py` to build and visualize the dependency graph using Matplotlib.
 4. Use `draw_plotly_with_annotation.py` to visualize the graph with Plotly.
 
+5. Specify the configuration file and run the script using the command line:
+```sh
+python trace_lineage.py -c config.yaml
+```
+
+## Visual Example
+Here is an example of a dependency graph:
+
+![Dependency Graph Example](images/graph_example.png)
+
 ## License
 This project is licensed under the MIT License.
 
@@ -77,3 +87,4 @@ This project is licensed under the MIT License.
 - [Matplotlib](https://matplotlib.org/)
 - [Plotly](https://plotly.com/)
 - [OpenPyXL](https://openpyxl.readthedocs.io/en/stable/)
+- [PyYAML](https://pyyaml.org/)

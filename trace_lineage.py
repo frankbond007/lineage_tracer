@@ -1,110 +1,91 @@
+import argparse
+import yaml
+import logging
 import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.drawing.nx_pydot import graphviz_layout
 from get_metadata import get_metadata_from_sheet
-# from draw_plotly_graph import gen_graph
 from draw_plotly_with_annotation import gen_graph_annotate
 import tkinter as tk
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-#Need to install graphviz
 
 def build_graph(metadata, final_target):
+    """
+    Builds a directed graph from metadata.
 
+    Parameters:
+    metadata (list): List of tuples containing source tables, target table, and transformation ID.
+    final_target (str): The final target table name.
+
+    Returns:
+    networkx.DiGraph: A directed graph representing the data lineage.
+    """
     graph = nx.DiGraph()
-    print(f"metadata: \n {metadata}")
     for sources, target, transformation_id in metadata:
         for source in sources.split():
-            #Add or update the edge with transformation_id as an attribute
             graph.add_edge(source, target, transformation_id=transformation_id)
-    final_target_label = final_target
 
+    final_target_label = final_target
     subgraph_nodes = nx.ancestors(graph, final_target_label) | {final_target_label}
     subgraph = graph.subgraph(subgraph_nodes).copy()
 
     return subgraph
-def draw_graph(graph):
-    """Draws the graph with dot layout and autoscales UI elements according to
-    the screen resolution"""
 
+
+def draw_graph(graph):
+    """
+    Draws the graph using Matplotlib with dot layout.
+
+    Parameters:
+    graph (networkx.DiGraph): The graph to draw.
+    """
     root = tk.Tk()
     screen_width = root.winfo_screenmmwidth()
     screen_height = root.winfo_screenheight()
-    root.destroy() # Closing tkinter window
+    root.destroy()
 
-    #Scale figure size based on screen resolution
     fig_width = screen_width / 100
     fig_height = screen_height / 100
+    font_size = max(fig_width / 2, 12)
 
-    #Adjust font size dynamically
-    font_size = max(fig_width / 2, 12) #ensure minimum font size for readability
-
-    # Use dot layout from graphviz
-    pos = graphviz_layout(graph, prog = 'dot')
-
-    #Create figure with dynamic size
+    pos = graphviz_layout(graph, prog='dot')
     plt.figure(figsize=(fig_width, fig_height))
 
-    #Draw the graph with scaled font size
-    nx.draw(graph, pos, with_labels=True, node_color = 'skyblue', node_size = 3000,
-            edge_color = 'gray', linewidths = 1, font_size = font_size, font_weight = 'bold',
-            arrows = True, arrowsize = 20)
-    #Optional: if you are displaying wdf_dt_id on edges
+    nx.draw(graph, pos, with_labels=True, node_color='skyblue', node_size=3000,
+            edge_color='gray', linewidths=1, font_size=font_size, font_weight='bold',
+            arrows=True, arrowsize=20)
+
     edge_labels = nx.get_edge_attributes(graph, 'transformation_id')
-    nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels,font_color='red', font_size = font_size)
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels, font_color='red', font_size=font_size)
 
-    plt.title('Dependency graph with Transformations (Dot Layout)', size = font_size)
+    plt.title('Dependency graph with Transformations (Dot Layout)', size=font_size)
     plt.show()
 
 
-def draw_spring_graph(graph):
-    #k: optimal distance between nodes, iterations: number of iterations for the algorithm
-    pos = nx.spring_layout(graph, k = 4, iterations = 50)
-    plt.figure(figsize = (20, 20)) #increase the figure size
-    nx.draw_networkx_nodes(graph, pos, node_color='skyblue', node_size=500)
-    nx.draw_networkx_edges(graph, pos, edge_color='gray', width=1, alpha=0.5, style='dashed',
-                           connectionstyle='arc3,rad=0.1')
-    nx.draw_networkx_labels(graph, pos, font_size=8, font_family='sans-serif') #Decrease font size
-    plt.title('Dependency Graph', size=20)
-    plt.axis('off') # Turn off axis
-    plt.show()
+def main(config_path):
+    # Load configuration
+    with open(config_path, 'r') as file:
+        config = yaml.safe_load(file)
 
-metadata = get_metadata_from_sheet('sample.xlsx', 'Sheet1')
-final_target = "z"
+    input_file = config.get('input_file')
+    sheet_name = config.get('sheet_name')
+    final_target = config.get('final_target')
 
-graph = build_graph(metadata, final_target)
-def find_unique_transformations(graph, final_target):
-    def dfs(node, path, transformations, visited):
-        #Avoid cycles
-        if node in visited:
-            return
-        visited.add(node)
+    metadata = get_metadata_from_sheet(input_file, sheet_name)
+    if not metadata:
+        logging.error("Failed to load metadata.")
+        return
 
-        #Extend path and transformations
-        path.append(node)
-        if node != final_target: #Skip appending transformation for the final node itself
-            for _, attr in graph[node].items():
-                transformation_id = attr['transformation_id']
-                if transformation_id not in transformations:
-                    transformations.append(transformation_id)
+    graph = build_graph(metadata, final_target)
+    draw_graph(graph)
+    gen_graph_annotate(graph)
 
-        #Reached final target, record the path and transformations
-        if node == final_target:
-            unique_transformations.add(tuple(transformations))
-        else:
-            for successor in graph.successors(node):
-                dfs(successor, path[:], transformations[:], visited.copy())
-    unique_transformations = set()
-    #start DFS from nodes that have paths to the final target
-    for node in nx.ancestors(graph, final_target):
-        dfs(node, [], [], set())
 
-    #Print  unique sequences of transformations
-    for sequence in unique_transformations:
-        print(" -> ".join(sequence))
-#After building the graph
-#find_unique_transformations(graph, final_target)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Trace data lineage and visualize dependency graph.")
+    parser.add_argument('-c', '--config', type=str, required=True, help="Path to the configuration file.")
 
-#Draw the graph
-draw_graph(graph)
-gen_graph_annotate(graph)
+    args = parser.parse_args()
+    main(args.config)

@@ -1,8 +1,6 @@
-networkx
-matplotlib
-pandas
 openpyxl
-sqlparse
-plotly
+matplotlib
+networkx
 pydot
-tkinter
+plotly
+PyYAML
