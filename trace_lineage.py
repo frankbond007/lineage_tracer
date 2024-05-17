@@ -1,12 +1,12 @@
 import argparse
-import yaml
 import logging
-import matplotlib.pyplot as plt
 import networkx as nx
-from networkx.drawing.nx_pydot import graphviz_layout
 from get_metadata import get_metadata_from_sheet
 from draw_plotly_with_annotation import gen_graph_annotate
+from save_to_atlas_json import save_atlas_json
 import tkinter as tk
+import matplotlib.pyplot as plt
+from networkx.drawing.nx_pydot import graphviz_layout
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -26,11 +26,9 @@ def build_graph(metadata, final_target):
     for sources, target, transformation_id in metadata:
         for source in sources.split():
             graph.add_edge(source, target, transformation_id=transformation_id)
-
     final_target_label = final_target
     subgraph_nodes = nx.ancestors(graph, final_target_label) | {final_target_label}
     subgraph = graph.subgraph(subgraph_nodes).copy()
-
     return subgraph
 
 
@@ -64,28 +62,35 @@ def draw_graph(graph):
     plt.show()
 
 
-def main(config_path):
-    # Load configuration
-    with open(config_path, 'r') as file:
-        config = yaml.safe_load(file)
-
-    input_file = config.get('input_file')
-    sheet_name = config.get('sheet_name')
-    final_target = config.get('final_target')
-
+def main(input_file, sheet_name, final_target, output_file, graph_type):
     metadata = get_metadata_from_sheet(input_file, sheet_name)
     if not metadata:
         logging.error("Failed to load metadata.")
         return
 
     graph = build_graph(metadata, final_target)
-    draw_graph(graph)
-    gen_graph_annotate(graph)
+
+    # Save the graph to Atlas JSON
+    save_atlas_json(graph, 'my-namespace', output_file)
+
+    # Draw the graph based on user selection
+    if graph_type == 'matplotlib':
+        draw_graph(graph)
+    elif graph_type == 'plotly':
+        gen_graph_annotate(graph)
+    else:
+        logging.error("Invalid graph type specified. Please use 'matplotlib' or 'plotly'.")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Trace data lineage and visualize dependency graph.")
-    parser.add_argument('-c', '--config', type=str, required=True, help="Path to the configuration file.")
+    parser = argparse.ArgumentParser(description="Trace data lineage and export to Atlas JSON.")
+    parser.add_argument('-i', '--input', type=str, required=True, help="Path to the input Excel file.")
+    parser.add_argument('-s', '--sheet', type=str, required=True, help="Name of the sheet in the Excel file.")
+    parser.add_argument('-t', '--target', type=str, required=True, help="Name of the final target table.")
+    parser.add_argument('-o', '--output', type=str, required=True, help="Path to the output JSON file.")
+    parser.add_argument('-g', '--graph', type=str, choices=['matplotlib', 'plotly'], required=True,
+                        help="Type of graph to generate (matplotlib or plotly).")
 
     args = parser.parse_args()
-    main(args.config)
+    main(input_file=args.input, sheet_name=args.sheet, final_target=args.target, output_file=args.output,
+         graph_type=args.graph)

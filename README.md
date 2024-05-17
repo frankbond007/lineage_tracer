@@ -2,12 +2,13 @@
 # Data Lineage Tracing Application
 
 ## Overview
-This application traces the lineage of data tables using metadata from an Excel sheet and visualizes the dependency graph using both Matplotlib and Plotly. It includes functionalities to build the graph, draw it using different layouts, and annotate it with transformation IDs.
+This application traces the lineage of data tables using metadata from an Excel sheet and visualizes the dependency graph using either Matplotlib or Plotly. It includes functionalities to build the graph, draw it using different layouts, and annotate it with transformation IDs.
 
 ## Files
 - **`get_metadata.py`**: Contains the function to extract metadata from an Excel sheet.
-- **`trace_lineage.py`**: Main script to build the dependency graph, draw it using Matplotlib, and find unique transformations.
+- **`trace_lineage.py`**: Main script to build the dependency graph, export it to JSON, and visualize it using either Matplotlib or Plotly.
 - **`draw_plotly_with_annotation.py`**: Contains the function to draw the dependency graph using Plotly with annotations.
+- **`save_to_atlas_json.py`**: Contains the function to export the dependency graph to Atlas JSON format.
 
 ## Installation
 To run this application, you need the following Python packages. You can install them using the `requirements.txt` file:
@@ -39,49 +40,33 @@ metadata = get_metadata_from_sheet('sample.xlsx', 'Sheet1')
 ```
 
 ### Step 2: Trace Lineage and Draw Graphs
-Use the `trace_lineage.py` script to build the dependency graph and visualize it using both Matplotlib and Plotly.
+Use the `trace_lineage.py` script to build the dependency graph, export it to JSON, and visualize it using either Matplotlib or Plotly.
 
-#### Example:
-```python
-import networkx as nx
-from trace_lineage import build_graph, draw_graph
-from get_metadata import get_metadata_from_sheet
-
-metadata = get_metadata_from_sheet('sample.xlsx', 'Sheet1')
-final_target = "p"
-graph = build_graph(metadata, final_target)
-draw_graph(graph)
+#### Command-Line Usage:
+```sh
+python trace_lineage.py -i sample.xlsx -s Sheet1 -t p -o lineage.json -g matplotlib
 ```
 
-### Step 3: Draw Plotly Graph with Annotations
-Use the `draw_plotly_with_annotation.py` script to draw the dependency graph using Plotly with transformation ID annotations.
+or
 
-#### Example:
-```python
-from draw_plotly_with_annotation import gen_graph_annotate
-
-gen_graph_annotate(graph)
+```sh
+python trace_lineage.py -i sample.xlsx -s Sheet1 -t p -o lineage.json -g plotly
 ```
 
 ## Example Workflow
 1. Prepare an Excel file `sample.xlsx` with a sheet named `Sheet1` containing columns: `source_tables`, `target_table`, `transformation_id`.
 2. Use `get_metadata.py` to extract metadata.
-3. Use `trace_lineage.py` to build and visualize the dependency graph using Matplotlib.
-4. Use `draw_plotly_with_annotation.py` to visualize the graph with Plotly.
-
-5. Specify the configuration file and run the script using the command line:
-```sh
-python trace_lineage.py -c config.yaml
-```
+3. Use `trace_lineage.py` to build the dependency graph, export it to JSON, and visualize it using either Matplotlib or Plotly.
 
 ## Visual Example
-Here is an example of a matplotlib dependency graph:
+Here is an example of a Matplotlib dependency graph:
 
 ![Dependency Graph Example](samples/mplt_lib_example.png)
 
-Here is an example of a plotly dependency graph:
+Here is an example of a Plotly dependency graph:
 
 ![Dependency Graph Example](samples/plotly_example.png)
+
 ## License
 This project is licensed under the MIT License.
 
@@ -90,4 +75,3 @@ This project is licensed under the MIT License.
 - [Matplotlib](https://matplotlib.org/)
 - [Plotly](https://plotly.com/)
 - [OpenPyXL](https://openpyxl.readthedocs.io/en/stable/)
-- [PyYAML](https://pyyaml.org/)
