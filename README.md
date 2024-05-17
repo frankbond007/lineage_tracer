@@ -75,10 +75,13 @@ python trace_lineage.py -c config.yaml
 ```
 
 ## Visual Example
-Here is an example of a dependency graph:
+Here is an example of a matplotlib dependency graph:
 
-![Dependency Graph Example](images/graph_example.png)
+![Dependency Graph Example](samples/mplt_lib_example.png)
 
+Here is an example of a plotly dependency graph:
+
+![Dependency Graph Example](samples/plotly_example.png)
 ## License
 This project is licensed under the MIT License.
 
