@@ -2,13 +2,13 @@
 # Data Lineage Tracing Application
 
 ## Overview
-This application traces the lineage of data tables using metadata from an Excel sheet and visualizes the dependency graph using either Matplotlib or Plotly. It includes functionalities to build the graph, draw it using different layouts, and annotate it with transformation IDs.
+This application traces the lineage of data tables using metadata from an Excel or CSV file and visualizes the dependency graph using either Matplotlib or Plotly. It includes functionalities to build the graph, draw it using different layouts, and annotate it with transformation IDs.
 
 ## Files
-- **`get_metadata.py`**: Contains the function to extract metadata from an Excel sheet.
+- **`get_metadata.py`**: Contains the function to extract metadata from an Excel or CSV file.
 - **`trace_lineage.py`**: Main script to build the dependency graph, export it to JSON, and visualize it using either Matplotlib or Plotly.
 - **`draw_plotly_with_annotation.py`**: Contains the function to draw the dependency graph using Plotly with annotations.
-- **`save_to_atlas_json.py`**: Contains the function to export the dependency graph to Atlas JSON format.
+- **`export_to_atlas_json.py`**: Contains the function to export the dependency graph to Atlas JSON format.
 
 ## Installation
 To run this application, you need the following Python packages. You can install them using the `requirements.txt` file:
@@ -30,13 +30,17 @@ You also need to install Graphviz:
 ## Usage
 
 ### Step 1: Extract Metadata
-Use the `get_metadata.py` script to extract metadata from an Excel sheet. The metadata includes source tables, target tables, and transformation IDs.
+Use the `get_metadata.py` script to extract metadata from an Excel or CSV file. The metadata includes source tables, target tables, and transformation IDs.
 
 #### Example:
 ```python
-from get_metadata import get_metadata_from_sheet
+from get_metadata import get_metadata_from_sheet, get_metadata_from_csv
 
+# For Excel
 metadata = get_metadata_from_sheet('sample.xlsx', 'Sheet1')
+
+# For CSV
+metadata = get_metadata_from_csv('sample.csv')
 ```
 
 ### Step 2: Trace Lineage and Draw Graphs
@@ -44,17 +48,17 @@ Use the `trace_lineage.py` script to build the dependency graph, export it to JS
 
 #### Command-Line Usage:
 ```sh
-python trace_lineage.py -i sample.xlsx -s Sheet1 -t p -o lineage.json -g matplotlib
+python trace_lineage.py -i sample.xlsx -s Sheet1 -t p -o lineage.json -g matplotlib --input-type excel
 ```
 
 or
 
 ```sh
-python trace_lineage.py -i sample.xlsx -s Sheet1 -t p -o lineage.json -g plotly
+python trace_lineage.py -i sample.csv -t p -o lineage.json -g plotly --input-type csv
 ```
 
 ## Example Workflow
-1. Prepare an Excel file `sample.xlsx` with a sheet named `Sheet1` containing columns: `source_tables`, `target_table`, `transformation_id`.
+1. Prepare an Excel file `sample.xlsx` or a CSV file `sample.csv` with columns: `source_tables`, `target_table`, `transformation_id`.
 2. Use `get_metadata.py` to extract metadata.
 3. Use `trace_lineage.py` to build the dependency graph, export it to JSON, and visualize it using either Matplotlib or Plotly.
 

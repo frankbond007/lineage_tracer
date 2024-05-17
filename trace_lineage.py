@@ -1,9 +1,9 @@
 import argparse
 import logging
 import networkx as nx
-from get_metadata import get_metadata_from_sheet
+from get_metadata import get_metadata_from_sheet, get_metadata_from_csv
 from draw_plotly_with_annotation import gen_graph_annotate
-from save_to_atlas_json import save_atlas_json
+from export_to_atlas_json import save_atlas_json
 import tkinter as tk
 import matplotlib.pyplot as plt
 from networkx.drawing.nx_pydot import graphviz_layout
@@ -62,35 +62,44 @@ def draw_graph(graph):
     plt.show()
 
 
-def main(input_file, sheet_name, final_target, output_file, graph_type):
-    metadata = get_metadata_from_sheet(input_file, sheet_name)
+def main(input_file, sheet_name, final_target, output_file, graph_type, input_type='excel'):
+    logging.info("Starting the lineage tracing process...")
+    if input_type == 'excel':
+        metadata = get_metadata_from_sheet(input_file, sheet_name)
+    elif input_type == 'csv':
+        metadata = get_metadata_from_csv(input_file)
+    else:
+        logging.error("Invalid input type specified. Please use 'excel' or 'csv'.")
+        return
+
     if not metadata:
         logging.error("Failed to load metadata.")
         return
 
     graph = build_graph(metadata, final_target)
-
-    # Save the graph to Atlas JSON
     save_atlas_json(graph, 'my-namespace', output_file)
 
-    # Draw the graph based on user selection
     if graph_type == 'matplotlib':
         draw_graph(graph)
     elif graph_type == 'plotly':
         gen_graph_annotate(graph)
     else:
         logging.error("Invalid graph type specified. Please use 'matplotlib' or 'plotly'.")
+    logging.info("Lineage tracing process completed.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Trace data lineage and export to Atlas JSON.")
-    parser.add_argument('-i', '--input', type=str, required=True, help="Path to the input Excel file.")
-    parser.add_argument('-s', '--sheet', type=str, required=True, help="Name of the sheet in the Excel file.")
+    parser.add_argument('-i', '--input', type=str, required=True, help="Path to the input Excel or CSV file.")
+    parser.add_argument('-s', '--sheet', type=str,
+                        help="Name of the sheet in the Excel file (required if input type is Excel).")
     parser.add_argument('-t', '--target', type=str, required=True, help="Name of the final target table.")
     parser.add_argument('-o', '--output', type=str, required=True, help="Path to the output JSON file.")
     parser.add_argument('-g', '--graph', type=str, choices=['matplotlib', 'plotly'], required=True,
                         help="Type of graph to generate (matplotlib or plotly).")
+    parser.add_argument('--input-type', type=str, choices=['excel', 'csv'], default='excel',
+                        help="Type of input file (excel or csv).")
 
     args = parser.parse_args()
     main(input_file=args.input, sheet_name=args.sheet, final_target=args.target, output_file=args.output,
-         graph_type=args.graph)
+         graph_type=args.graph, input_type=args.input_type)

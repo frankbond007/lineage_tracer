@@ -1,0 +1,708 @@
+{
+  "entities": [
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.a",
+        "name": "a"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.d",
+        "name": "d"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.b",
+        "name": "b"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.c",
+        "name": "c"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.h",
+        "name": "h"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.e",
+        "name": "e"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.f",
+        "name": "f"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.g",
+        "name": "g"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.l",
+        "name": "l"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.i",
+        "name": "i"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.j",
+        "name": "j"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.k",
+        "name": "k"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.p",
+        "name": "p"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.m",
+        "name": "m"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.n",
+        "name": "n"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.o",
+        "name": "o"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.u",
+        "name": "u"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.q",
+        "name": "q"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.r",
+        "name": "r"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.s",
+        "name": "s"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.t",
+        "name": "t"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.z",
+        "name": "z"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.v",
+        "name": "v"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.x",
+        "name": "x"
+      }
+    },
+    {
+      "typeName": "Table",
+      "attributes": {
+        "qualifiedName": "my-namespace.y",
+        "name": "y"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.a_to_d_1",
+        "name": "a_to_d_1",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.a"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.d"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.d_to_h_2",
+        "name": "d_to_h_2",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.d"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.h"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.b_to_d_1",
+        "name": "b_to_d_1",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.b"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.d"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.c_to_d_1",
+        "name": "c_to_d_1",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.c"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.d"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.h_to_l_3",
+        "name": "h_to_l_3",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.h"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.l"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.e_to_h_2",
+        "name": "e_to_h_2",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.e"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.h"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.f_to_h_2",
+        "name": "f_to_h_2",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.f"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.h"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.g_to_h_2",
+        "name": "g_to_h_2",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.g"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.h"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.l_to_p_4",
+        "name": "l_to_p_4",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.l"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.p"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.i_to_l_3",
+        "name": "i_to_l_3",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.i"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.l"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.j_to_l_3",
+        "name": "j_to_l_3",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.j"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.l"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.k_to_l_3",
+        "name": "k_to_l_3",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.k"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.l"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.p_to_u_5",
+        "name": "p_to_u_5",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.p"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.m_to_p_4",
+        "name": "m_to_p_4",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.m"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.p"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.n_to_p_4",
+        "name": "n_to_p_4",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.n"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.p"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.o_to_p_4",
+        "name": "o_to_p_4",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.o"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.p"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.u_to_z_6",
+        "name": "u_to_z_6",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.z"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.q_to_u_5",
+        "name": "q_to_u_5",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.q"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.r_to_u_5",
+        "name": "r_to_u_5",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.r"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.s_to_u_5",
+        "name": "s_to_u_5",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.s"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.t_to_u_5",
+        "name": "t_to_u_5",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.t"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.u"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.v_to_z_6",
+        "name": "v_to_z_6",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.v"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.z"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.x_to_z_6",
+        "name": "x_to_z_6",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.x"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.z"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    },
+    {
+      "typeName": "Process",
+      "attributes": {
+        "qualifiedName": "my-namespace.y_to_z_6",
+        "name": "y_to_z_6",
+        "inputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.y"
+            }
+          }
+        ],
+        "outputs": [
+          {
+            "uniqueAttributes": {
+              "qualifiedName": "my-namespace.z"
+            }
+          }
+        ],
+        "operationType": "TRANSFORM"
+      }
+    }
+  ],
+  "relationships": []
+}

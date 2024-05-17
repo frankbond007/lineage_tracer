@@ -1,4 +1,5 @@
 import openpyxl as op
+import pandas as pd
 import logging
 
 
@@ -37,6 +38,33 @@ def get_metadata_from_sheet(file_name, sheet_name):
 
     except FileNotFoundError:
         logging.error(f"File '{file_path}' not found")
+        return []
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return []
+
+
+def get_metadata_from_csv(file_name):
+    """
+    Extracts metadata from a CSV file.
+
+    Parameters:
+    file_name (str): The path to the CSV file.
+
+    Returns:
+    list: A list of tuples containing the metadata.
+    """
+    try:
+        df = pd.read_csv(file_name)
+        metadata = []
+        for _, row in df.iterrows():
+            source_tables = row['source_tables']
+            target_table = row['target_table']
+            transformation_id = row['transformation_id']
+            metadata.append((source_tables, target_table, transformation_id))
+        return metadata
+    except FileNotFoundError:
+        logging.error(f"File '{file_name}' not found")
         return []
     except Exception as e:
         logging.error(f"An error occurred: {e}")

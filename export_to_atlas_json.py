@@ -1,6 +1,5 @@
 import json
 import networkx as nx
-from datetime import datetime
 
 
 def graph_to_atlas(graph, namespace):

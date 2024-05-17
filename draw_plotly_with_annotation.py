@@ -2,12 +2,6 @@ import plotly.graph_objs as go
 from networkx.drawing.nx_pydot import graphviz_layout
 
 def gen_graph_annotate(graph):
-    """
-    Generates a Plotly graph with annotations for the given graph.
-
-    Parameters:
-    graph (networkx.DiGraph): The graph to visualize.
-    """
     pos = graphviz_layout(graph, prog='dot')
 
     edge_x = []
@@ -62,4 +56,5 @@ def gen_graph_annotate(graph):
         yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
     ))
 
+    # Explicitly show the graph
     fig.show()
